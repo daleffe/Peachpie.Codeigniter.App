@@ -1,0 +1,12 @@
+<Project Sdk="Peachpie.NET.Sdk/1.0.9">
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="**/*.php;**/*.phar;" Exclude="$(DefaultExcludeItems)" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Update="Peachpie.App" Version="1.1.6" />
+  </ItemGroup>
+</Project>
