@@ -1,9 +1,10 @@
+using System;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Rewrite;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
 
 namespace App.Server
 {
@@ -45,9 +46,18 @@ namespace App.Server
                 app.UseDeveloperExceptionPage();
             }
 
+            RewriteOptions rewriteOptions = new();
+
+            rewriteOptions.AddRewrite(@"^(favicon\.ico)$", "assets/ico/$1", skipRemainingRules: true);
+            rewriteOptions.AddRewrite(@"^assets/(.*)/(.*)$", "assets/$1/$2", skipRemainingRules: true);
+            rewriteOptions.AddRewrite(@"^(.*)$", "index.php/$1", skipRemainingRules: true);
+
+            app.UseRewriter(rewriteOptions);
+
             app.UseSession();
 
-            app.UsePhp();
+            app.UsePhp("/");
+
             app.UseDefaultFiles();
             app.UseStaticFiles();
         }
