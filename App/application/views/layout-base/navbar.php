@@ -7,7 +7,7 @@
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <ul class="navbar-nav me-auto mb-2 mb-md-0">
         <li class="nav-item">          
-          <?php echo anchor(index_page(), 'Home', array('title' => 'Home', 'class' => 'nav-link active', 'aria-current' => 'page')); ?>
+          <?php echo anchor("home", 'Home', array('title' => 'Home', 'class' => 'nav-link active', 'aria-current' => 'page')); ?>
         </li>
         <li class="nav-item">
           <?php echo anchor("auth/logout", 'Logout', array('title' => 'Logout', 'class' => 'nav-link')); ?>
