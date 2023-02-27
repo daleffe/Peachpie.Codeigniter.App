@@ -29,6 +29,7 @@ class CI_Session {
 
 	var $sess_encrypt_cookie		= FALSE;
 	var $sess_use_database			= FALSE;
+	var $sess_use_cookie			= FALSE;
 	var $sess_table_name			= '';
 	var $sess_expiration			= 7200;
 	var $sess_expire_on_close		= FALSE;
@@ -63,7 +64,7 @@ class CI_Session {
 
 		// Set all the session preferences, which can either be set
 		// manually via the $params array above or via the config file
-		foreach (array('sess_encrypt_cookie', 'sess_use_database', 'sess_table_name', 'sess_expiration', 'sess_expire_on_close', 'sess_match_ip', 'sess_match_useragent', 'sess_cookie_name', 'cookie_path', 'cookie_domain', 'cookie_secure', 'sess_time_to_update', 'time_reference', 'cookie_prefix', 'encryption_key') as $key)
+		foreach (array('sess_encrypt_cookie', 'sess_use_cookie', 'sess_use_database', 'sess_table_name', 'sess_expiration', 'sess_expire_on_close', 'sess_match_ip', 'sess_match_useragent', 'sess_cookie_name', 'cookie_path', 'cookie_domain', 'cookie_secure', 'sess_time_to_update', 'time_reference', 'cookie_prefix', 'encryption_key') as $key)
 		{
 			$this->$key = (isset($params[$key])) ? $params[$key] : $this->CI->config->item($key);
 		}
@@ -137,6 +138,25 @@ class CI_Session {
 	{
 		// Fetch the cookie
 		$session = $this->CI->input->cookie($this->sess_cookie_name);
+
+		// Use in-memory session
+		if ($this->sess_use_cookie == FALSE)
+		{		
+			if (session_status() == PHP_SESSION_DISABLED)
+			{
+				$session = FALSE;
+			}
+
+			if (session_status() == PHP_SESSION_NONE)
+			{
+				session_start();
+			}
+
+			if (session_status() == PHP_SESSION_ACTIVE && isset($_SESSION[$this->sess_cookie_name]))
+			{
+				$session = $_SESSION[$this->sess_cookie_name];			
+			}			
+		}						
 
 		// No cookie?  Goodbye cruel world!...
 		if ($session === FALSE)
@@ -331,22 +351,34 @@ class CI_Session {
 		$sessid .= $this->CI->input->ip_address();
 
 		$this->userdata = array(
-							'session_id'	=> md5(uniqid($sessid, TRUE)),
-							'ip_address'	=> $this->CI->input->ip_address(),
-							'user_agent'	=> substr($this->CI->input->user_agent(), 0, 120),
-							'last_activity'	=> $this->now,
-							'user_data'		=> ''
-							);
-
+			'session_id'	=> md5(uniqid($sessid, TRUE)),
+			'ip_address'	=> $this->CI->input->ip_address(),
+			'user_agent'	=> substr($this->CI->input->user_agent(), 0, 120),
+			'last_activity'	=> $this->now,
+			'user_data'		=> ''
+		);
 
 		// Save the data to the DB if needed
 		if ($this->sess_use_database === TRUE)
 		{
 			$this->CI->db->query($this->CI->db->insert_string($this->sess_table_name, $this->userdata));
+		} else if ($this->sess_use_cookie === FALSE)
+		{
+			// Session was disabled, so good bye
+			if (session_status() == PHP_SESSION_DISABLED)
+			{
+				show_error('Session is disabled');
+			}
+
+			// Initialize session
+			if (session_status() == PHP_SESSION_NONE)
+			{
+				session_start();				
+			}
 		}
 
-		// Write the cookie
-		$this->_set_cookie();
+		// Write session
+		$this->_set_cookie();			
 	}
 
 	// --------------------------------------------------------------------
@@ -423,14 +455,35 @@ class CI_Session {
 		}
 
 		// Kill the cookie
-		setcookie(
-					$this->sess_cookie_name,
-					addslashes(serialize(array())),
-					($this->now - 31500000),
-					$this->cookie_path,
-					$this->cookie_domain,
-					0
-				);
+		if ($this->sess_use_cookie === TRUE)
+		{
+			setcookie(
+						$this->sess_cookie_name,
+						addslashes(serialize(array())),
+						($this->now - 31500000),
+						$this->cookie_path,
+						$this->cookie_domain,
+						0
+			);
+		} else 
+		{
+			if (session_status() == PHP_SESSION_NONE)
+			{
+				session_start();				
+			}
+
+			if (session_status() == PHP_SESSION_ACTIVE)
+			{
+				if (!empty($this->sess_cookie_name))
+				{
+					unset($_SESSION[$this->sess_cookie_name]);
+				}			
+				else
+				{
+					session_destroy();
+				}
+			}
+		}
 
 		// Kill session data
 		$this->userdata = array();
@@ -478,6 +531,12 @@ class CI_Session {
 		if (is_string($newdata))
 		{
 			$newdata = array($newdata => $newval);
+		}
+		
+		if (!is_array($newdata))
+		{
+			$arr['_variables'] = $newdata;
+			$newdata = $arr;
 		}
 
 		if (count($newdata) > 0)
@@ -654,6 +713,31 @@ class CI_Session {
 	// --------------------------------------------------------------------
 
 	/**
+	 * Write session in-memory
+	 *
+	 * @access  public
+	 * @return void
+	 */
+	function _set_session($session_data)
+	{
+		if (!empty($this->sess_cookie_name) && !is_null($session_data))
+		{
+			if (session_status() == PHP_SESSION_NONE)
+			{
+				session_start();
+			}
+
+			if (session_status() == PHP_SESSION_ACTIVE)
+			{
+				$_SESSION[$this->sess_cookie_name] = $session_data;				
+				return TRUE;
+			}		 
+		}		 
+
+		return FALSE;
+	}
+
+	/**
 	 * Write the session cookie
 	 *
 	 * @access	public
@@ -678,15 +762,22 @@ class CI_Session {
 
 		$expire = ($this->sess_expire_on_close === TRUE) ? 0 : $this->sess_expiration + time();
 
-		// Set the cookie
-		setcookie(
-			$this->sess_cookie_name,
-			$cookie_data,
-			$expire,
-			$this->cookie_path,
-			$this->cookie_domain,
-			$this->cookie_secure
-		);
+		if ($this->sess_use_cookie === FALSE)
+		{
+			$this->_set_session($cookie_data);
+		} 
+		else 
+		{
+			// Set the cookie
+			setcookie(
+				$this->sess_cookie_name,
+				$cookie_data,
+				$expire,
+				$this->cookie_path,
+				$this->cookie_domain,
+				$this->cookie_secure
+			);
+		}		
 	}
 
 	// --------------------------------------------------------------------
