@@ -3,7 +3,7 @@
 class Auth extends CI_Controller {
 	
 	public function index()
-	{		
+	{			
 		if ($this->input->method() == 'post') {
 			/* Form validation */
 			$this->form_validation->set_rules('email','e-mail',"trim|required|email");
@@ -19,6 +19,8 @@ class Auth extends CI_Controller {
 
 				if ($authorization == false)  {
 					$this->session->set_flashdata('errors','<div class="alert alert-danger" role="alert">E-mail and/or password is invalid.</div>');
+
+					redirect('/auth','refresh');
 				} else {		
 					// Save session data
 					$this->session->set_userdata($auth);
