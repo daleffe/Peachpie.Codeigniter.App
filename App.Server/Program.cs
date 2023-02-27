@@ -30,12 +30,13 @@ namespace App.Server
             services.AddSession(options =>
             {
                 options.IdleTimeout = TimeSpan.FromMinutes(30);
-                options.Cookie.HttpOnly = true;
+                options.Cookie.HttpOnly = true;                
+                options.Cookie.IsEssential = true;
             });
 
             services.AddPhp(options =>
             {
-
+                options.Session.AutoStart = false;
             });
         }
 
