@@ -10,7 +10,14 @@
 |
 */
 
-
+// Check if logged user has valid session, otherwhise go to auth
+$hook['post_controller_constructor'][] = array(
+    'class' => 'AuthenticationHook',
+    'function' => 'check',
+    'filename' => 'authentication.php',
+    'filepath' => 'hooks',
+    'params' => ''
+);
 
 /* End of file hooks.php */
 /* Location: ./application/config/hooks.php */
