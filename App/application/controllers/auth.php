@@ -25,7 +25,7 @@ class Auth extends CI_Controller {
 					// Save session data
 					$this->session->set_userdata($auth);
 
-					redirect('/','refresh');
+					redirect('/home','refresh');
 				}
 			}
 		}		
