@@ -1,4 +1,7 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
+require_once(BASEPATH.'database/DB_driver.php');
+
 /**
  * CodeIgniter
  *
@@ -27,7 +30,7 @@
  * @author		EllisLab Dev Team
  * @link		http://codeigniter.com/user_guide/database/
  */
-class CI_DB_active_record {
+class CI_DB_active_record extends CI_DB_driver {
 
 	var $ar_select				= array();
 	var $ar_distinct			= FALSE;
