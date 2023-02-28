@@ -728,7 +728,7 @@ abstract class REST extends CI_Controller {
         }
 
         // Sure it exists, but can they do anything with it?        
-        if (! method_exists($this, $controller_method))
+        if (!in_array($this->request->method, $this->allowed_http_methods) || !method_exists($this, $controller_method))
         {
             $this->response([
                 $this->config->item('rest_status_field_name') => FALSE,
@@ -926,6 +926,11 @@ abstract class REST extends CI_Controller {
         // Get the CONTENT-TYPE value from the SERVER variable
         $content_type = $this->input->server('CONTENT_TYPE');
 
+        if (empty($content_type))
+        {
+            $content_type = $this->input->server('HTTP_CONTENT_TYPE');
+        }
+        
         if (empty($content_type) === FALSE)
         {
             // If a semi-colon exists in the string, then explode by ; and get the value of where
@@ -1043,15 +1048,20 @@ abstract class REST extends CI_Controller {
     protected function _detect_method()
     {
         // Declare a variable to store the method        
-        $this->input->method();
-
+        $method = $this->input->method();
+        
         // Determine whether the 'enable_emulate_request' setting is enabled
         if ($this->config->item('enable_emulate_request') === TRUE)
         {                        
-            $method = strtolower($this->input->server('HTTP_X_HTTP_METHOD_OVERRIDE'));                
-        }        
+            $method = $this->input->server('HTTP_X_HTTP_METHOD_OVERRIDE');
+            
+            if ($method == false)
+            {
+                $method = $this->input->method();
+            }
+        }
 
-        return in_array($method, $this->allowed_http_methods) && method_exists($this, '_parse_' . $method) ? $method : 'get';
+        return strtolower($method);
     }
 
     /**
@@ -1508,12 +1518,8 @@ abstract class REST extends CI_Controller {
      */
     protected function _parse_post()
     {
-        $this->_post_args = $_POST;
-
-        if ($this->request->format)
-        {
-            $this->request->body = $this->input->raw_input_stream;
-        }
+        $this->_post_args = $_POST;                   
+        $this->request->body = $this->input->raw_input_stream;                    
     }
 
     /**
