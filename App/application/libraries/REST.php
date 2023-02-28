@@ -1935,24 +1935,21 @@ abstract class REST extends CI_Controller {
         {
             $this->_check_whitelist_auth();
         }
+        
+        // Returns NULL if the SERVER variables PHP_AUTH_USER/HTTP_AUTHENTICATION/HTTP_AUTHORIZATION don't exist
+        $username = $this->input->server('PHP_AUTH_USER') !== false ? $this->input->server('PHP_AUTH_USER') : NULL;
+        $password = $this->input->server('PHP_AUTH_PW') !== false ? $this->input->server('PHP_AUTH_PW') : NULL;
 
-        // Returns NULL if the SERVER variables PHP_AUTH_USER and HTTP_AUTHENTICATION don't exist
-        $username = $this->input->server('PHP_AUTH_USER');
-        $http_auth = $this->input->server('HTTP_AUTHENTICATION') ?: $this->input->server('HTTP_AUTHORIZATION');
-
-        $password = NULL;
-        if ($username !== NULL)
-        {
-            $password = $this->input->server('PHP_AUTH_PW');
-        }
-        elseif ($http_auth !== NULL)
+        $http_auth = $this->input->server('HTTP_AUTHENTICATION') ?: $this->input->server('HTTP_AUTHORIZATION');               
+        
+        if ($http_auth !== FALSE)
         {
             // If the authentication header is set as basic, then extract the username and password from
-            // HTTP_AUTHORIZATION e.g. my_username:my_password. This is passed in the .htaccess file
+            // HTTP_AUTHORIZATION e.g. my_username:my_password. This is passed in the .htaccess file            
             if (strpos(strtolower($http_auth), 'basic') === 0)
             {
                 // Search online for HTTP_AUTHORIZATION workaround to explain what this is doing
-                list($username, $password) = explode(':', base64_decode(substr($this->input->server('HTTP_AUTHORIZATION'), 6)));
+                list($username, $password) = explode(':', base64_decode(substr($http_auth, 6)));
             }
         }
 
