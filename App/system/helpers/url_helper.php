@@ -540,12 +540,12 @@ if ( ! function_exists('redirect'))
 		{
 			case 'refresh'	: 				
 				header("Refresh:0;url=".$uri);				
-				return;
+				break;
 			default			: 
 				header("Location: ".$uri, TRUE, $http_response_code);				
 		}
 
-		return;		
+		exit;
 	}
 }
 
