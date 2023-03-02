@@ -14,7 +14,12 @@ class MY_Session extends CI_Session
 
 	public function output_alerts()
 	{
-		echo $this->alerts();
+		if ($this->has_alerts())
+		{
+			return $this->alerts();
+		}
+
+		return FALSE;
 	}
 
 	public function alerts()
