@@ -1,10 +1,9 @@
-<?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
 
 class AuthenticationHook {
 	protected $CI;
 
-	public function __construct() 
+	public function __construct()
 	{
 		$this->CI = get_instance();
 	}
@@ -17,15 +16,15 @@ class AuthenticationHook {
 		{
 			// Default routing
 			$controller = $this->CI->router->fetch_class();
-			//$method = $this->CI->router->fetch_method();			
+			$method = $this->CI->router->fetch_method();
 
 			$email = $this->CI->session->userdata('email');
-			$password = $this->CI->session->userdata('password'); // Don't do this, I just did it for testing.	
-			
+			$password = $this->CI->session->userdata('password'); // Don't do this, I just did it for testing.
+
 			// Here we can check permissions, groups, etc.
 
 			if ($controller != 'auth')
-			{								
+			{
 				if ($email == false || $password == false)
 				{
 					redirect('auth','refresh');
@@ -33,7 +32,7 @@ class AuthenticationHook {
 			}
 			else
 			{
-				if ($email !== false && $password !== false)
+				if ($method != 'logout' && $email !== false && $password !== false)
 				{
 					redirect('/home','refresh');
 				}
