@@ -1,14 +1,14 @@
-<?php
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
 
 class MY_Session extends CI_Session
-{	
+{
 	var $_alert_key = 'alerts';
 
-    /* 
-	 * Alerts	 
+    /*
+	 * Alerts
      */
 	public function has_alerts()
-	{		
+	{
 		return $this->flashdata($this->_alert_key) !== false || $this->userdata($this->flashdata_key.':new:'.$this->_alert_key) !== false;
 	}
 
@@ -66,13 +66,13 @@ class MY_Session extends CI_Session
 	public function set_alert($text = '', $class = 'alert alert-info')
 	{
 		if (!empty($text))
-		{			
-			$this->set_flashdata($this->_alert_key,$this->_get_alert($text,$class));			
-		}		
-	}	
+		{
+			$this->set_flashdata($this->_alert_key,$this->_get_alert($text,$class));
+		}
+	}
 
 	private function _get_alert($text, $class = 'alert alert-primary')
-	{		
+	{
 		return '<div' . (empty(trim($class)) ? '' : ' class="' . $class . '"') . ' role="alert">' . trim($text) . '</div>';
 	}
 }
