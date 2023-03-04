@@ -1,4 +1,4 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
 /*
 | -------------------------------------------------------------------
 | MIME TYPES
@@ -100,7 +100,6 @@ $mimes = array(	'hqx'	=>	'application/mac-binhex40',
 				'eml'	=>	'message/rfc822',
 				'json' => array('application/json', 'text/json')
 			);
-
 
 /* End of file mimes.php */
 /* Location: ./application/config/mimes.php */

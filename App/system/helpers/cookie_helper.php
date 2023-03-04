@@ -1,4 +1,4 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * CodeIgniter
  *
@@ -98,7 +98,6 @@ if ( ! function_exists('delete_cookie'))
 		set_cookie($name, '', '', $domain, $path, $prefix);
 	}
 }
-
 
 /* End of file cookie_helper.php */
 /* Location: ./system/helpers/cookie_helper.php */

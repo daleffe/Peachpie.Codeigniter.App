@@ -1,4 +1,4 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * CodeIgniter
  *
@@ -71,7 +71,6 @@ if ( ! function_exists('byte_format'))
 		return number_format($num, $precision).' '.$unit;
 	}
 }
-
 
 /* End of file number_helper.php */
 /* Location: ./system/helpers/number_helper.php */

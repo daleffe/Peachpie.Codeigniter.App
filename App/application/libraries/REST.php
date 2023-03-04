@@ -1,6 +1,4 @@
-<?php
-
-defined('BASEPATH') OR exit('No direct script access allowed');
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
  * CodeIgniter Rest Controller
@@ -417,7 +415,6 @@ abstract class REST extends CI_Controller {
             $this->format = $this->libraryFormat;
         }
 
-
         // Determine supported output formats from configuration
         $supported_formats = $this->config->item('rest_supported_formats');
 
@@ -644,7 +641,7 @@ abstract class REST extends CI_Controller {
             // CodeIgniter 3 is recommended for v5.4 or above
             throw new Exception('Using PHP v'.PHP_VERSION.', though PHP v5.4 or greater is required');
         }
-        
+
         if (explode('.', CI_VERSION, 2)[0] < 1)
         {
             throw new Exception('REST Server requires at least CodeIgniter 2.x');
@@ -727,7 +724,7 @@ abstract class REST extends CI_Controller {
             $this->is_valid_request = false;
         }
 
-        // Sure it exists, but can they do anything with it?        
+        // Sure it exists, but can they do anything with it?
         if (!in_array($this->request->method, $this->allowed_http_methods) || !method_exists($this, $controller_method))
         {
             $this->response([
@@ -885,7 +882,7 @@ abstract class REST extends CI_Controller {
         	if ($continue === FALSE)
         	{
             	// Display the data and exit execution
-            	$this->output->_display();            
+            	$this->output->_display();
                 exit();
         	}
         	else
@@ -897,7 +894,7 @@ abstract class REST extends CI_Controller {
 		}
 		else{
 			echo json_encode($data);
-		}        
+		}
     }
 
     /**
@@ -930,7 +927,7 @@ abstract class REST extends CI_Controller {
         {
             $content_type = $this->input->server('HTTP_CONTENT_TYPE');
         }
-        
+
         if (empty($content_type) === FALSE)
         {
             // If a semi-colon exists in the string, then explode by ; and get the value of where
@@ -1047,14 +1044,14 @@ abstract class REST extends CI_Controller {
      */
     protected function _detect_method()
     {
-        // Declare a variable to store the method        
+        // Declare a variable to store the method
         $method = $this->input->method();
-        
+
         // Determine whether the 'enable_emulate_request' setting is enabled
         if ($this->config->item('enable_emulate_request') === TRUE)
-        {                        
+        {
             $method = $this->input->server('HTTP_X_HTTP_METHOD_OVERRIDE');
-            
+
             if ($method == false)
             {
                 $method = $this->input->method();
@@ -1506,7 +1503,7 @@ abstract class REST extends CI_Controller {
      */
     protected function _parse_get()
     {
-        // Merge both the URI segments and query parameters        
+        // Merge both the URI segments and query parameters
         $this->_get_args = array_merge($this->_get_args, $this->_query_args);
     }
 
@@ -1518,8 +1515,8 @@ abstract class REST extends CI_Controller {
      */
     protected function _parse_post()
     {
-        $this->_post_args = $_POST;                   
-        $this->request->body = $this->input->raw_input_stream;                    
+        $this->_post_args = $_POST;
+        $this->request->body = $this->input->raw_input_stream;
     }
 
     /**
@@ -1618,7 +1615,7 @@ abstract class REST extends CI_Controller {
      */
     protected function _parse_query()
     {
-        $this->_query_args = $this->input->get() === false ? array() : $this->input->get();     
+        $this->_query_args = $this->input->get() === false ? array() : $this->input->get();
     }
 
     // INPUT FUNCTION --------------------------------------------------------------
@@ -1935,17 +1932,17 @@ abstract class REST extends CI_Controller {
         {
             $this->_check_whitelist_auth();
         }
-        
+
         // Returns NULL if the SERVER variables PHP_AUTH_USER/HTTP_AUTHENTICATION/HTTP_AUTHORIZATION don't exist
         $username = $this->input->server('PHP_AUTH_USER') !== false ? $this->input->server('PHP_AUTH_USER') : NULL;
         $password = $this->input->server('PHP_AUTH_PW') !== false ? $this->input->server('PHP_AUTH_PW') : NULL;
 
-        $http_auth = $this->input->server('HTTP_AUTHENTICATION') ?: $this->input->server('HTTP_AUTHORIZATION');               
-        
+        $http_auth = $this->input->server('HTTP_AUTHENTICATION') ?: $this->input->server('HTTP_AUTHORIZATION');
+
         if ($http_auth !== FALSE)
         {
             // If the authentication header is set as basic, then extract the username and password from
-            // HTTP_AUTHORIZATION e.g. my_username:my_password. This is passed in the .htaccess file            
+            // HTTP_AUTHORIZATION e.g. my_username:my_password. This is passed in the .htaccess file
             if (strpos(strtolower($http_auth), 'basic') === 0)
             {
                 // Search online for HTTP_AUTHORIZATION workaround to explain what this is doing

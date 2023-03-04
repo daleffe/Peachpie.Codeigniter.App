@@ -1,9 +1,9 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Auth extends CI_Controller {
-	
+
 	public function index()
-	{			
+	{
 		if ($this->input->method() == 'post') {
 			/* Form validation */
 			$this->form_validation->set_rules('email','e-mail',"trim|required|email");
@@ -21,14 +21,14 @@ class Auth extends CI_Controller {
 					$this->session->set_flashdata('errors','<div class="alert alert-danger" role="alert">E-mail and/or password is invalid.</div>');
 
 					redirect('/auth','refresh');
-				} else {		
+				} else {
 					// Save session data
 					$this->session->set_userdata($auth);
 
 					redirect('/home','refresh');
 				}
 			}
-		}		
+		}
 
 		$this->load->view('layout', array('title' => 'Auth'));
 	}

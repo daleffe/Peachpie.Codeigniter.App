@@ -1,4 +1,4 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * CodeIgniter
  *
@@ -147,7 +147,7 @@ class CI_Image_lib {
 		if ($this->source_image == '')
 		{
 			$this->set_error('imglib_source_image_required');
-			return FALSE;	
+			return FALSE;
 		}
 
 		/*
@@ -190,7 +190,7 @@ class CI_Image_lib {
 		// Set the Image Properties
 		if ( ! $this->get_image_properties($this->source_folder.$this->source_image))
 		{
-			return FALSE;	
+			return FALSE;
 		}
 
 		/*
@@ -400,7 +400,7 @@ class CI_Image_lib {
 		if ($this->rotation_angle == '' OR ! in_array($this->rotation_angle, $degs))
 		{
 			$this->set_error('imglib_rotation_angle_required');
-			return FALSE;	
+			return FALSE;
 		}
 
 		// Reassign the width and height
@@ -414,7 +414,6 @@ class CI_Image_lib {
 			$this->width	= $this->orig_width;
 			$this->height	= $this->orig_height;
 		}
-
 
 		// Choose resizing function
 		if ($this->image_library == 'imagemagick' OR $this->image_library == 'netpbm')
@@ -1134,7 +1133,6 @@ class CI_Image_lib {
 		if ($image_type == '')
 			$image_type = $this->image_type;
 
-
 		switch ($image_type)
 		{
 			case	 1 :
@@ -1228,7 +1226,7 @@ class CI_Image_lib {
 				break;
 			default		:
 							$this->set_error(array('imglib_unsupported_imagecreate'));
-							return FALSE;				
+							return FALSE;
 		}
 
 		return TRUE;

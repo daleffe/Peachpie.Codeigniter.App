@@ -1,4 +1,4 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * CodeIgniter
  *
@@ -312,7 +312,6 @@ class CI_DB_mysqli_driver extends CI_DB {
 			return $str;
 		}
 
-
 		$str = mysqli_real_escape_string($this->conn_id, $str);
 
 		// escape LIKE condition wildcards
@@ -564,7 +563,6 @@ class CI_DB_mysqli_driver extends CI_DB {
 
 	// --------------------------------------------------------------------
 
-
 	/**
 	 * Replace statement
 	 *
@@ -580,7 +578,7 @@ class CI_DB_mysqli_driver extends CI_DB {
 	{
 		return "REPLACE INTO ".$table." (".implode(', ', $keys).") VALUES (".implode(', ', $values).")";
 	}
-	
+
 	// --------------------------------------------------------------------
 
 	/**
@@ -759,9 +757,7 @@ class CI_DB_mysqli_driver extends CI_DB {
 		@mysqli_close($conn_id);
 	}
 
-
 }
-
 
 /* End of file mysqli_driver.php */
 /* Location: ./system/database/drivers/mysqli/mysqli_driver.php */

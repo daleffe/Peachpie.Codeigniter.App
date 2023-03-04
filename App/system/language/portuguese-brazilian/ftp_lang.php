@@ -14,6 +14,5 @@ $lang['ftp_unable_to_rename']		= "Não foi possível renomear o arquivo.";
 $lang['ftp_unable_to_delete']		= "Não foi possível deletar o arquivo.";
 $lang['ftp_unable_to_move']			= "Não foi possível mover o arquivo. Por favor tenha certeza que o diretório destino existe.";
 
-
 /* End of file ftp_lang.php */
 /* Location: ./system/language/pt-br/ftp_lang.php */

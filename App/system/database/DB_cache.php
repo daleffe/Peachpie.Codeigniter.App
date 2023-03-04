@@ -1,4 +1,4 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * CodeIgniter
  *
@@ -190,7 +190,6 @@ class CI_DB_Cache {
 	}
 
 }
-
 
 /* End of file DB_cache.php */
 /* Location: ./system/database/DB_cache.php */

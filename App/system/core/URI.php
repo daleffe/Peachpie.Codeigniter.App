@@ -1,4 +1,4 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * CodeIgniter
  *
@@ -73,7 +73,6 @@ class CI_URI {
 		$this->config =& load_class('Config', 'core');
 		log_message('debug', "URI Class Initialized");
 	}
-
 
 	// --------------------------------------------------------------------
 
@@ -633,7 +632,6 @@ class CI_URI {
 	{
 		return $this->uri_string;
 	}
-
 
 	// --------------------------------------------------------------------
 

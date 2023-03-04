@@ -1,4 +1,4 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * CodeIgniter
  *
@@ -98,7 +98,6 @@ class CI_DB_utility extends CI_DB_forge {
 			return ( ! in_array($database_name, $this->list_databases())) ? FALSE : TRUE;
 		}
 	}
-
 
 	// --------------------------------------------------------------------
 
@@ -411,7 +410,6 @@ class CI_DB_utility extends CI_DB_forge {
 	}
 
 }
-
 
 /* End of file DB_utility.php */
 /* Location: ./system/database/DB_utility.php */

@@ -1,4 +1,4 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * CodeIgniter
  *
@@ -117,10 +117,10 @@ function &DB($params = '', $active_record_override = NULL)
 	if ($active_record_override !== NULL)
 	{
 		$active_record = $active_record_override;
-	}	
+	}
 
 	if ( ! isset($active_record) OR $active_record == TRUE)
-	{		
+	{
 		if ( ! class_exists('CI_DB'))
 		{
 			require_once(BASEPATH.'database/abstracts/CI_DB_active_record.php');
@@ -152,8 +152,6 @@ function &DB($params = '', $active_record_override = NULL)
 
 	return $DB;
 }
-
-
 
 /* End of file DB.php */
 /* Location: ./system/database/DB.php */

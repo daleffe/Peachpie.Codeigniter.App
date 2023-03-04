@@ -1,4 +1,4 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * CodeIgniter
  *
@@ -938,7 +938,7 @@ class CI_Form_validation {
 
 		return ($str !== $field) ? FALSE : TRUE;
 	}
-	
+
 	// --------------------------------------------------------------------
 
 	/**
@@ -953,7 +953,7 @@ class CI_Form_validation {
 	{
 		list($table, $field)=explode('.', $field);
 		$query = $this->CI->db->limit(1)->get_where($table, array($field => $str));
-		
+
 		return $query->num_rows() === 0;
     }
 

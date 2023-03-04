@@ -1,4 +1,4 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * CodeIgniter
  *
@@ -606,7 +606,6 @@ if ( ! function_exists('timezones'))
 		return ( ! isset($zones[$tz])) ? 0 : $zones[$tz];
 	}
 }
-
 
 /* End of file date_helper.php */
 /* Location: ./system/helpers/date_helper.php */

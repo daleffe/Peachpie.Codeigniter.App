@@ -1,4 +1,4 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * CodeIgniter
  *
@@ -18,7 +18,6 @@ if ( ! function_exists('xml_parser_create'))
 {
 	show_error('Your PHP installation does not support XML');
 }
-
 
 // ------------------------------------------------------------------------
 
@@ -108,7 +107,6 @@ class CI_Xmlrpc {
 									 'VALUE'			=> array('MEMBER', 'DATA', 'PARAM', 'FAULT')
 									 );
 
-
 		// XML-RPC Responses
 		$this->xmlrpcerr['unknown_method'] = '1';
 		$this->xmlrpcstr['unknown_method'] = 'This is not a known method for this XML-RPC Server';
@@ -127,7 +125,6 @@ class CI_Xmlrpc {
 
 		log_message('debug', "XML-RPC Class Initialized");
 	}
-
 
 	//-------------------------------------
 	//  Initialize Prefs
@@ -215,7 +212,6 @@ class CI_Xmlrpc {
 	}
 	// END
 
-
 	//-------------------------------------
 	//  Set Debug
 	//-------------------------------------
@@ -266,7 +262,6 @@ class CI_Xmlrpc {
 		return $temp;
 	}
 	// END
-
 
 	//-------------------------------------
 	//  Sends XML-RPC Request
@@ -324,7 +319,6 @@ class CI_Xmlrpc {
 	}
 	// END
 
-
 	//-------------------------------------
 	//  Send Response for Server Request
 	//-------------------------------------
@@ -341,8 +335,6 @@ class CI_Xmlrpc {
 	// END
 
 } // END XML_RPC Class
-
-
 
 /**
  * XML-RPC Client class
@@ -407,7 +399,6 @@ class XML_RPC_Client extends CI_Xmlrpc
 		$op .= "Content-Length: ".strlen($msg->payload). "$r$r";
 		$op .= $msg->payload;
 
-
 		if ( ! fputs($fp, $op, strlen($op)))
 		{
 			error_log($this->xmlrpcstr['http_error']);
@@ -420,7 +411,6 @@ class XML_RPC_Client extends CI_Xmlrpc
 	}
 
 } // end class XML_RPC_Client
-
 
 /**
  * XML-RPC Response class
@@ -505,7 +495,7 @@ class XML_RPC_Response
 	function decode($array=FALSE)
 	{
 		$CI =& get_instance();
-		
+
 		if ($array !== FALSE && is_array($array))
 		{
 			foreach ($array as $key => $value)
@@ -538,8 +528,6 @@ class XML_RPC_Response
 
 		return $result;
 	}
-
-
 
 	//-------------------------------------
 	//  XML-RPC Object to PHP Types
@@ -580,7 +568,6 @@ class XML_RPC_Response
 		}
 	}
 
-
 	//-------------------------------------
 	//  ISO-8601 time to server or UTC time
 	//-------------------------------------
@@ -598,8 +585,6 @@ class XML_RPC_Response
 	}
 
 } // End Response Class
-
-
 
 /**
  * XML-RPC Message class
@@ -685,7 +670,6 @@ class XML_RPC_Message extends CI_Xmlrpc
 			return $r;
 		}
 
-
 		//-------------------------------------
 		//  Check for HTTP 200 Response
 		//-------------------------------------
@@ -717,7 +701,6 @@ class XML_RPC_Message extends CI_Xmlrpc
 		xml_set_character_data_handler($parser, 'character_data');
 		//xml_set_default_handler($parser, 'default_handler');
 
-
 		//-------------------------------------
 		//  GET HEADERS
 		//-------------------------------------
@@ -732,7 +715,6 @@ class XML_RPC_Message extends CI_Xmlrpc
 			$this->xh[$parser]['headers'][] = $line;
 		}
 		$data = implode("\r\n", $lines);
-
 
 		//-------------------------------------
 		//  PARSE XML DATA
@@ -941,7 +923,6 @@ class XML_RPC_Message extends CI_Xmlrpc
 	}
 	// END
 
-
 	//-------------------------------------
 	//  End Element Handler
 	//-------------------------------------
@@ -1111,15 +1092,14 @@ class XML_RPC_Message extends CI_Xmlrpc
 		}
 	}
 
-
-	function addParam($par) { 
-		$this->params[] = $par; 
+	function addParam($par) {
+		$this->params[] = $par;
 	}
 
 	function output_parameters($array=FALSE)
 	{
 		$CI =& get_instance();
-		
+
 		if ($array !== FALSE && is_array($array))
 		{
 			foreach ($array as $key => $value)
@@ -1160,7 +1140,6 @@ class XML_RPC_Message extends CI_Xmlrpc
 		return $parameters;
 	}
 
-
 	function decode_message($param)
 	{
 		$kind = $param->kindOf();
@@ -1199,8 +1178,6 @@ class XML_RPC_Message extends CI_Xmlrpc
 	}
 
 } // End XML_RPC_Messages class
-
-
 
 /**
  * XML-RPC Values class
@@ -1311,11 +1288,11 @@ class XML_RPC_Values extends CI_Xmlrpc
 		switch($this->mytype)
 		{
 			case 3:
-				return 'struct';				
+				return 'struct';
 			case 2:
-				return 'array';				
+				return 'array';
 			case 1:
-				return 'scalar';				
+				return 'scalar';
 			default:
 				return 'undef';
 		}
@@ -1392,7 +1369,6 @@ class XML_RPC_Values extends CI_Xmlrpc
 		list($a,$b) = each($this->me);
 		return $b;
 	}
-
 
 	//-------------------------------------
 	// Encode time in ISO-8601 form.

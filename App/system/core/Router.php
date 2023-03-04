@@ -1,4 +1,4 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * CodeIgniter
  *
@@ -331,7 +331,6 @@ class CI_Router {
 			return $segments;
 		}
 
-
 		// If we've gotten this far it means that the URI does not correlate to a valid
 		// controller class.  We will now see if there is an override
 		if ( ! empty($this->routes['404_override']))
@@ -343,7 +342,6 @@ class CI_Router {
 
 			return $x;
 		}
-
 
 		// Nothing else to do at this point but show a 404
 		show_404($segments[0]);
@@ -514,7 +512,6 @@ class CI_Router {
 			$this->set_method($routing['function']);
 		}
 	}
-
 
 }
 // END Router Class

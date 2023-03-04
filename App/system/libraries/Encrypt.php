@@ -1,4 +1,4 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * CodeIgniter
  *
@@ -259,7 +259,7 @@ class CI_Encrypt {
 	}
 
 	// --------------------------------------------------------------------
-	
+
 	/**
 	 * Adds permuted noise to the IV + encrypted data to protect
 	 * against Man-in-the-middle attacks on CBC mode ciphers
@@ -433,8 +433,8 @@ class CI_Encrypt {
 	function sha1($str)
 	{
 		if ( ! function_exists('sha1'))
-		{			
-			return bin2hex(mhash(MHASH_SHA1, $str));			
+		{
+			return bin2hex(mhash(MHASH_SHA1, $str));
 		}
 		else
 		{

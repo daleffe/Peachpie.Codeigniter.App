@@ -1,4 +1,4 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * CodeIgniter
  *
@@ -34,7 +34,6 @@ class CI_FTP {
 	var $passive	= TRUE;
 	var $debug		= FALSE;
 	var $conn_id	= FALSE;
-
 
 	/**
 	 * Constructor - Sets Preferences
@@ -152,7 +151,6 @@ class CI_FTP {
 	}
 
 	// --------------------------------------------------------------------
-
 
 	/**
 	 * Change directory
@@ -563,7 +561,6 @@ class CI_FTP {
 		return FALSE;
 	}
 
-
 	// --------------------------------------------------------------------
 
 	/**
@@ -583,7 +580,6 @@ class CI_FTP {
 		$x = explode('.', $filename);
 		return end($x);
 	}
-
 
 	// --------------------------------------------------------------------
 
@@ -611,7 +607,6 @@ class CI_FTP {
 							'log',
 							'xml'
 							);
-
 
 		return (in_array($ext, $text_types)) ? 'ascii' : 'binary';
 	}
@@ -651,7 +646,6 @@ class CI_FTP {
 		$CI->lang->load('ftp');
 		show_error($CI->lang->line($line));
 	}
-
 
 }
 // END FTP Class

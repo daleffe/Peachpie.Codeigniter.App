@@ -18,6 +18,5 @@ $lang['upload_no_file_types'] = "Você não especificou nenhum tipo de arquivo p
 $lang['upload_bad_filename'] = "O nome do arquivo que você enviou já existe em nosso servidor";
 $lang['upload_not_writable'] = "A pasta destino para upload parece não ser gravável.";
 
-
 /* End of file upload_lang.php */
 /* Location: ./system/language/pt-br/upload_lang.php */

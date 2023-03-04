@@ -1,4 +1,4 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * CodeIgniter
  *
@@ -25,7 +25,6 @@
  * @author		EllisLab Dev Team
  * @link		http://codeigniter.com/user_guide/helpers/directory_helper.html
  */
-
 
 // --------------------------------------------------------------------
 
@@ -73,7 +72,7 @@ if ( ! function_exists('singular'))
 			'/(n)ews$/'             => '\1\2ews',
 			'/([^u])s$/'            => '\1',
 		);
-		
+
 		foreach ($singular_rules as $rule => $replacement)
 		{
 			if (preg_match($rule, $result))
@@ -104,7 +103,7 @@ if ( ! function_exists('plural'))
 	function plural($str, $force = FALSE)
 	{
 		$result = strval($str);
-	
+
 		$plural_rules = array(
 			'/^(ox)$/'                 => '\1\2en',     // ox
 			'/([m|l])ouse$/'           => '\1ice',      // mouse, louse
@@ -198,7 +197,6 @@ if ( ! function_exists('humanize'))
 		return ucwords(preg_replace('/[_]+/', ' ', strtolower(trim($str))));
 	}
 }
-
 
 /* End of file inflector_helper.php */
 /* Location: ./system/helpers/inflector_helper.php */

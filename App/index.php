@@ -41,7 +41,7 @@ if (defined('ENVIRONMENT'))
 			error_reporting(0);
 		break;
 
-		default:		    
+		default:
 			echo('The application environment is not set correctly.');
 			return;
 	}
@@ -105,7 +105,6 @@ if (defined('ENVIRONMENT'))
 	// The controller function you wish to be called.
 	// $routing['function']	= '';
 
-
 /*
  * -------------------------------------------------------------------
  *  CUSTOM CONFIG VALUES
@@ -125,7 +124,7 @@ if (defined('ENVIRONMENT'))
 
 // --------------------------------------------------------------------
 // END OF USER CONFIGURABLE SETTINGS.  DO NOT EDIT BELOW THIS LINE
-// --------------------------------------------------------------------	
+// --------------------------------------------------------------------
 
 // Set the current directory correctly for CLI requests
 if (defined('STDIN'))
@@ -150,7 +149,6 @@ $system_path = rtrim($system_path, '/').'/';
 
 	// Path to the system folder
 	define('BASEPATH', str_replace("\\", "/", $system_path));
-
 
 	// Path to the front controller (this file)
 	define('FCPATH', str_replace(SELF, '', __FILE__));

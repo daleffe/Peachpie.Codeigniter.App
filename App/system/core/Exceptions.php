@@ -1,4 +1,4 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * CodeIgniter
  *
@@ -60,7 +60,6 @@ class CI_Exceptions {
 						E_USER_NOTICE		=>	'User Notice',
 						E_STRICT			=>	'Runtime Notice'
 					);
-
 
 	/**
 	 * Constructor
@@ -185,7 +184,6 @@ class CI_Exceptions {
 		ob_end_clean();
 		echo $buffer;
 	}
-
 
 }
 // END Exceptions Class

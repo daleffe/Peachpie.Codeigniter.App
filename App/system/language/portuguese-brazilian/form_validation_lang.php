@@ -25,6 +25,5 @@ $lang['decimal']			= "O campo %s deve conter um número decimal.";
 $lang['less_than']			= "O campo %s deve conter um número menor que %s.";
 $lang['greater_than']		= "O campo %s deve conter um número maior que %s.";
 
-
 /* End of file form_validation_lang.php */
 /* Location: ./system/language/pt-br/form_validation_lang.php */

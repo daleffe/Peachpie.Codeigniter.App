@@ -1,4 +1,4 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * CodeIgniter
  *
@@ -198,7 +198,7 @@ if ( ! function_exists('random_string'))
 	{
 		switch($type)
 		{
-			case 'basic'	: return mt_rand();				
+			case 'basic'	: return mt_rand();
 			case 'alnum'	:
 			case 'numeric'	:
 			case 'nozero'	:
@@ -222,16 +222,16 @@ if ( ! function_exists('random_string'))
 					$str .= substr($pool, mt_rand(0, strlen($pool) -1), 1);
 				}
 
-				return $str;				
+				return $str;
 			case 'unique'	:
 			case 'md5'		:
-					return md5(uniqid(mt_rand()));				
+					return md5(uniqid(mt_rand()));
 			case 'encrypt'	:
 			case 'sha1'	:
 					$CI =& get_instance();
 					$CI->load->helper('security');
 
-					return do_hash(uniqid(mt_rand(), TRUE), 'sha1');				
+					return do_hash(uniqid(mt_rand(), TRUE), 'sha1');
 		}
 	}
 }
@@ -297,7 +297,6 @@ if ( ! function_exists('repeater'))
 		return (($num > 0) ? str_repeat($data, $num) : '');
 	}
 }
-
 
 /* End of file string_helper.php */
 /* Location: ./system/helpers/string_helper.php */

@@ -1,4 +1,4 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * CodeIgniter
  *
@@ -108,7 +108,6 @@ class CI_Upload {
 							'client_name'		=> ''
 						);
 
-
 		foreach ($defaults as $key => $val)
 		{
 			if (isset($config[$key]))
@@ -192,7 +191,6 @@ class CI_Upload {
 
 			return FALSE;
 		}
-
 
 		// Set the uploaded data as class variables
 		$this->file_temp = $_FILES[$field]['tmp_name'];

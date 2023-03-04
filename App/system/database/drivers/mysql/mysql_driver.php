@@ -1,4 +1,4 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * CodeIgniter
  *
@@ -57,7 +57,7 @@ class CI_DB_mysql_driver extends CI_DB {
 
 	// whether SET NAMES must be used to set the character set
 	var $use_set_names;
-	
+
 	/**
 	 * Non-persistent database connection
 	 *
@@ -544,7 +544,6 @@ class CI_DB_mysql_driver extends CI_DB {
 
 	// --------------------------------------------------------------------
 
-
 	/**
 	 * Replace statement
 	 *
@@ -581,7 +580,6 @@ class CI_DB_mysql_driver extends CI_DB {
 
 	// --------------------------------------------------------------------
 
-
 	/**
 	 * Update statement
 	 *
@@ -616,7 +614,6 @@ class CI_DB_mysql_driver extends CI_DB {
 	}
 
 	// --------------------------------------------------------------------
-
 
 	/**
 	 * Update_Batch statement
@@ -669,7 +666,6 @@ class CI_DB_mysql_driver extends CI_DB {
 	}
 
 	// --------------------------------------------------------------------
-
 
 	/**
 	 * Truncate statement
@@ -763,7 +759,6 @@ class CI_DB_mysql_driver extends CI_DB {
 	}
 
 }
-
 
 /* End of file mysql_driver.php */
 /* Location: ./system/database/drivers/mysql/mysql_driver.php */

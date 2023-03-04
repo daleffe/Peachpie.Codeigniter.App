@@ -1,4 +1,4 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * CodeIgniter
  *
@@ -53,7 +53,7 @@ class CI_Javascript {
 		log_message('debug', "Javascript Class Initialized and loaded.  Driver used: $js_library_driver");
 	}
 
-	// --------------------------------------------------------------------	
+	// --------------------------------------------------------------------
 	// Event Code
 	// --------------------------------------------------------------------
 
@@ -381,10 +381,9 @@ class CI_Javascript {
 		return $this->js->_unload($element, $js);
 	}
 
-	// --------------------------------------------------------------------	
+	// --------------------------------------------------------------------
 	// Effects
 	// --------------------------------------------------------------------
-
 
 	/**
 	 * Add Class
@@ -596,7 +595,6 @@ class CI_Javascript {
 		return $this->js->_show($element, $speed, $callback);
 	}
 
-
 	// --------------------------------------------------------------------
 
 	/**
@@ -688,7 +686,7 @@ class CI_Javascript {
 
 		return $str;
 	}
-	
+
 	// --------------------------------------------------------------------
 
 	/**
@@ -722,7 +720,6 @@ class CI_Javascript {
 	{
 		return "</script>$extra";
 	}
-
 
 	// --------------------------------------------------------------------
 	// --------------------------------------------------------------------
@@ -858,7 +855,7 @@ class CI_Javascript {
 		}
 		elseif (is_string($result) OR $is_key)
 		{
-			return '"'.str_replace(array('\\', "\t", "\n", "\r", '"', '/'), array('\\\\', '\\t', '\\n', "\\r", '\"', '\/'), $result).'"';			
+			return '"'.str_replace(array('\\', "\t", "\n", "\r", '"', '/'), array('\\\\', '\\t', '\\n', "\\r", '\"', '\/'), $result).'"';
 		}
 		elseif (is_scalar($result))
 		{

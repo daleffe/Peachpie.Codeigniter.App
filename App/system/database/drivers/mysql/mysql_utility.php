@@ -1,4 +1,4 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * CodeIgniter
  *
@@ -160,7 +160,6 @@ class CI_DB_mysql_utility extends CI_DB_utility {
 
 			// Trim off the end comma
 			$field_str = preg_replace( "/, $/" , "" , $field_str);
-
 
 			// Build the insert string
 			foreach ($query->result_array() as $row)

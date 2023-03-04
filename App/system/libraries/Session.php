@@ -1,4 +1,4 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * CodeIgniter
  *
@@ -141,7 +141,7 @@ class CI_Session {
 
 		// Use in-memory session
 		if ($this->sess_use_cookie == FALSE)
-		{		
+		{
 			if (session_status() == PHP_SESSION_DISABLED)
 			{
 				$session = FALSE;
@@ -154,9 +154,9 @@ class CI_Session {
 
 			if (session_status() == PHP_SESSION_ACTIVE && isset($_SESSION[$this->sess_cookie_name]))
 			{
-				$session = $_SESSION[$this->sess_cookie_name];			
-			}			
-		}						
+				$session = $_SESSION[$this->sess_cookie_name];
+			}
+		}
 
 		// No cookie?  Goodbye cruel world!...
 		if ($session === FALSE)
@@ -373,12 +373,12 @@ class CI_Session {
 			// Initialize session
 			if (session_status() == PHP_SESSION_NONE)
 			{
-				session_start();				
+				session_start();
 			}
 		}
 
 		// Write session
-		$this->_set_cookie();			
+		$this->_set_cookie();
 	}
 
 	// --------------------------------------------------------------------
@@ -465,11 +465,11 @@ class CI_Session {
 						$this->cookie_domain,
 						0
 			);
-		} else 
+		} else
 		{
 			if (session_status() == PHP_SESSION_NONE)
 			{
-				session_start();				
+				session_start();
 			}
 
 			if (session_status() == PHP_SESSION_ACTIVE)
@@ -477,7 +477,7 @@ class CI_Session {
 				if (!empty($this->sess_cookie_name))
 				{
 					unset($_SESSION[$this->sess_cookie_name]);
-				}			
+				}
 				else
 				{
 					session_destroy();
@@ -532,7 +532,7 @@ class CI_Session {
 		{
 			$newdata = array($newdata => $newval);
 		}
-		
+
 		if (!is_array($newdata))
 		{
 			$arr['_variables'] = $newdata;
@@ -729,10 +729,10 @@ class CI_Session {
 
 			if (session_status() == PHP_SESSION_ACTIVE)
 			{
-				$_SESSION[$this->sess_cookie_name] = $session_data;				
+				$_SESSION[$this->sess_cookie_name] = $session_data;
 				return TRUE;
-			}		 
-		}		 
+			}
+		}
 
 		return FALSE;
 	}
@@ -765,8 +765,8 @@ class CI_Session {
 		if ($this->sess_use_cookie === FALSE)
 		{
 			$this->_set_session($cookie_data);
-		} 
-		else 
+		}
+		else
 		{
 			// Set the cookie
 			setcookie(
@@ -777,7 +777,7 @@ class CI_Session {
 				$this->cookie_domain,
 				$this->cookie_secure
 			);
-		}		
+		}
 	}
 
 	// --------------------------------------------------------------------
@@ -876,7 +876,6 @@ class CI_Session {
 			log_message('debug', 'Session garbage collection performed.');
 		}
 	}
-
 
 }
 // END Session Class

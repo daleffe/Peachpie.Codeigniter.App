@@ -1,4 +1,4 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * CodeIgniter
  *
@@ -267,7 +267,6 @@ class CI_Trackback {
 			$this->response .= fgets($fp, 128);
 		}
 		@fclose($fp);
-
 
 		if (stristr($this->response, '<error>0</error>') === FALSE)
 		{

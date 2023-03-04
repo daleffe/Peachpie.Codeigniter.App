@@ -1,4 +1,4 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * CodeIgniter
  *
@@ -77,7 +77,6 @@ class CI_Email {
 	var	$_base_charsets	= array('us-ascii', 'iso-2022-');	// 7-bit charsets (excluding language suffix)
 	var	$_bit_depths	= array('7bit', '8bit');
 	var	$_priorities	= array('1 (Highest)', '2 (High)', '3 (Normal)', '4 (Low)', '5 (Lowest)');
-
 
 	/**
 	 * Constructor - Sets Email Preferences
@@ -1039,7 +1038,7 @@ class CI_Email {
 				{
 					$this->_finalbody = $hdr . $this->newline . $this->newline . $this->_body;
 				}
-				return;			
+				return;
 			case 'html' :
 				if ($this->send_multipart === FALSE)
 				{
@@ -1076,7 +1075,7 @@ class CI_Email {
 				{
 					$this->_finalbody .= "--" . $this->_alt_boundary . "--";
 				}
-				return;			
+				return;
 			case 'plain-attach' :
 
 				$hdr .= "Content-Type: multipart/".$this->multipart."; boundary=\"" . $this->_atc_boundary."\"" . $this->newline . $this->newline;
@@ -1157,7 +1156,6 @@ class CI_Email {
 		}
 
 		$body .= implode($this->newline, $attachment).$this->newline."--".$this->_atc_boundary."--";
-
 
 		if ($this->_get_protocol() == 'mail')
 		{
@@ -1983,7 +1981,7 @@ class CI_Email {
 	protected function _mime_types($ext = "")
 	{
 		$mimes = array(	'hqx'	=>	'application/mac-binhex40',
-						'cpt'	=>	'application/mac-compactpro',						
+						'cpt'	=>	'application/mac-compactpro',
 						'bin'	=>	'application/macbinary',
 						'dms'	=>	'application/octet-stream',
 						'lha'	=>	'application/octet-stream',

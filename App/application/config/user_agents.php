@@ -1,4 +1,4 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
 /*
 | -------------------------------------------------------------------
 | USER AGENT TYPES
@@ -43,7 +43,6 @@ $platforms = array (
 					'gnu'				=> 'GNU/Linux',
 					'unix'				=> 'Unknown Unix OS'
 				);
-
 
 // The order of this array should NOT be changed. Many browsers return
 // multiple browser types so we want to identify the sub-type first.
@@ -128,7 +127,7 @@ $mobiles = array(
 					// Operating Systems
 					'symbian'				=> "Symbian",
 					'SymbianOS'				=> "SymbianOS",
-					'elaine'				=> "Palm",					
+					'elaine'				=> "Palm",
 					'series60'				=> "Symbian S60",
 					'windows ce'			=> "Windows CE",
 

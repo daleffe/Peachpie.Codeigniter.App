@@ -1,4 +1,4 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * CodeIgniter
  *
@@ -68,7 +68,6 @@ if ( ! function_exists('auto_typography'))
 		return $CI->typography->auto_typography($str, $strip_js_event_handlers, $reduce_linebreaks);
 	}
 }
-
 
 // --------------------------------------------------------------------
 

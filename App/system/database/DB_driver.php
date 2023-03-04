@@ -1,4 +1,4 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * CodeIgniter
  *
@@ -70,8 +70,6 @@ class CI_DB_driver {
 	var $stmt_id;
 	var $curs_id;
 	var $limit_used;
-
-
 
 	/**
 	 * Constructor.  Accepts one parameter containing the database
@@ -1068,7 +1066,6 @@ class CI_DB_driver {
 		$this->cache_on = FALSE;
 		return FALSE;
 	}
-
 
 	// --------------------------------------------------------------------
 

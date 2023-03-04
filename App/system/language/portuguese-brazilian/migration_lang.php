@@ -9,6 +9,5 @@ $lang['migration_missing_up_method']	= "A classe de migração \"%s\" está falt
 $lang['migration_missing_down_method']	= "A classe de migração \"%s\" está falntando o método 'down'.";
 $lang['migration_invalid_filename']		= "Migração \"%s\" tem nome de arquivo inválido.";
 
-
 /* End of file migration_lang.php */
 /* Location: ./system/language/pt-br/migration_lang.php */

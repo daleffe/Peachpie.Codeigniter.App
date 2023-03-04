@@ -1,6 +1,4 @@
-<?php
-
-defined('BASEPATH') OR exit('No direct script access allowed');
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
 
 // This can be removed if you use __autoload() in config.php OR use Modular Extensions
 /** @noinspection PhpIncludeInspection */
@@ -11,7 +9,7 @@ class Home extends REST {
     function __construct()
     {
         // Construct the parent class
-        parent::__construct();        
+        parent::__construct();
     }
 
     public function index_get()

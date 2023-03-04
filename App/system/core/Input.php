@@ -1,4 +1,4 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * CodeIgniter
  *
@@ -143,7 +143,7 @@ class CI_Input {
 		// Prior to PHP 5.6, the input stream can only be read once,
 		// so we'll need to check if we have already done that first.
 		if ( ! is_array($this->_input_stream))
-		{			
+		{
 			parse_str($this->raw_input_stream, $this->_input_stream);
 			is_array($this->_input_stream) OR $this->_input_stream = array();
 		}
@@ -234,7 +234,6 @@ class CI_Input {
 
 		return $this->_fetch_from_array($_POST, $index, $xss_clean);
 	}
-
 
 	// --------------------------------------------------------------------
 
@@ -703,7 +702,6 @@ class CI_Input {
 
 		// Sanitize PHP_SELF
 		$_SERVER['PHP_SELF'] = strip_tags($_SERVER['PHP_SELF']);
-
 
 		// CSRF Protection check on HTTP requests
 		if ($this->_enable_csrf == TRUE && ! $this->is_cli_request())

@@ -16,7 +16,6 @@ $lang['date_minutes'] = "Minutos";
 $lang['date_second'] = "Segundo";
 $lang['date_seconds'] = "Segundos";
 
-
 $lang['UM12']	= '(UTC -12:00) Baker/Howland Island';
 $lang['UM11']	= '(UTC -11:00) Samoa Time Zone, Niue';
 $lang['UM10']	= '(UTC -10:00) Hawaii-Aleutian Standard Time, Cook Islands, Tahiti';
@@ -57,7 +56,6 @@ $lang['UP12']	= '(UTC +12:00) Fiji, Gilbert Islands, Kamchatka Time, New Zealand
 $lang['UP1275']	= '(UTC +12:45) Chatham Islands Standard Time';
 $lang['UP13']	= '(UTC +13:00) Phoenix Islands Time, Tonga';
 $lang['UP14']	= '(UTC +14:00) Line Islands';
-
 
 /* End of file date_lang.php */
 /* Location: ./system/language/pt-br/date_lang.php */

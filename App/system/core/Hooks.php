@@ -1,4 +1,4 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * CodeIgniter
  *
@@ -89,7 +89,6 @@ class CI_Hooks {
 		{
 			include(APPPATH.'config/hooks.php');
 		}
-
 
 		if ( ! isset($hook) OR ! is_array($hook))
 		{

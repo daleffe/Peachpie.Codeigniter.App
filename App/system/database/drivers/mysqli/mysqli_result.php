@@ -1,4 +1,4 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * CodeIgniter
  *
@@ -104,7 +104,7 @@ class CI_DB_mysqli_result extends CI_DB_result {
 
 		return $retval;
 	}
-	
+
 	// --------------------------------------------------------------------
 
 	/**
@@ -169,7 +169,6 @@ class CI_DB_mysqli_result extends CI_DB_result {
 	}
 
 }
-
 
 /* End of file mysqli_result.php */
 /* Location: ./system/database/drivers/mysqli/mysqli_result.php */

@@ -1,4 +1,4 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * CodeIgniter
  *
@@ -34,7 +34,6 @@ class CI_Cart {
 	// Private variables.  Do not change!
 	var $CI;
 	var $_cart_contents	= array();
-
 
 	/**
 	 * Shopping Class Constructor
@@ -544,7 +543,6 @@ class CI_Cart {
 
 		$this->CI->session->unset_userdata('cart_contents');
 	}
-
 
 }
 

@@ -1,4 +1,4 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * CodeIgniter
  *
@@ -103,7 +103,6 @@ class CI_Output {
 		{
 			include APPPATH.'config/mimes.php';
 		}
-
 
 		$this->mime_types = $mimes;
 
@@ -566,7 +565,6 @@ class CI_Output {
 		log_message('debug', "Cache file is current. Sending it to browser.");
 		return TRUE;
 	}
-
 
 }
 // END Output Class

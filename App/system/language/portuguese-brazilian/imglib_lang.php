@@ -20,6 +20,5 @@ $lang['imglib_copy_failed'] = "A rotina de cópia de imagem falhou.";
 $lang['imglib_missing_font'] = "Não é possível encontrar a fonte para usar.";
 $lang['imglib_save_failed'] = "Não é possível salvar a imagem.  Por favor tenha certeza que a imagem e o diretório são graváveis.";
 
-
 /* End of file imglib_lang.php */
 /* Location: ./system/language/pt-br/imglib_lang.php */

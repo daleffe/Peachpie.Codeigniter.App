@@ -1,4 +1,4 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * CodeIgniter
  *
@@ -93,7 +93,6 @@ class CI_Driver_Library {
 
 }
 // END CI_Driver_Library CLASS
-
 
 /**
  * CodeIgniter Driver Class

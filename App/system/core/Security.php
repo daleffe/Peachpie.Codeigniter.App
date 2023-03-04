@@ -1,4 +1,4 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * CodeIgniter
  *
@@ -535,7 +535,7 @@ class CI_Security {
 				if ( ! isset($_entities))
 				{
 					$_entities = array_map(
-						'strtolower',						
+						'strtolower',
 						get_html_translation_table(HTML_ENTITIES, $flag)
 					);
 

@@ -1,4 +1,4 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * CodeIgniter
  *
@@ -37,7 +37,6 @@ class CI_DB_result {
 	var $current_row			= 0;
 	var $num_rows				= 0;
 	var $row_data				= NULL;
-
 
 	/**
 	 * Query result.  Acts as a wrapper function for the following functions.
@@ -295,7 +294,6 @@ class CI_DB_result {
 
 		return $result[$this->current_row];
 	}
-
 
 	// --------------------------------------------------------------------
 

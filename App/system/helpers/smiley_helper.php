@@ -1,4 +1,4 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * CodeIgniter
  *
@@ -238,7 +238,7 @@ if ( ! function_exists('_get_smiley_array'))
 		{
 			include(APPPATH.'config/smileys.php');
 		}
-		
+
 		if (isset($smileys) AND is_array($smileys))
 		{
 			return $smileys;
@@ -276,7 +276,6 @@ if ( ! function_exists('js_insert_smiley'))
 EOF;
 	}
 }
-
 
 /* End of file smiley_helper.php */
 /* Location: ./system/helpers/smiley_helper.php */

@@ -1,4 +1,4 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * CodeIgniter
  *
@@ -292,7 +292,6 @@ if ( ! function_exists('create_captcha'))
 				$x += $font_size;
 			}
 		}
-
 
 		// -----------------------------------
 		//  Create the border

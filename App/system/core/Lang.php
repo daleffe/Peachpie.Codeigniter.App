@@ -1,4 +1,4 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * CodeIgniter
  *
@@ -111,7 +111,6 @@ class CI_Lang {
 				show_error('Unable to load the requested language file: language/'.$idiom.'/'.$langfile);
 			}
 		}
-
 
 		if ( ! isset($lang))
 		{

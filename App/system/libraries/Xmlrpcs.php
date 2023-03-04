@@ -1,4 +1,4 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * CodeIgniter
  *
@@ -206,7 +206,6 @@ class CI_Xmlrpcs extends CI_Xmlrpc
 		xml_set_character_data_handler($parser, 'character_data');
 		//xml_set_default_handler($parser, 'default_handler');
 
-
 		//-------------------------------------
 		//  PARSE + PROCESS XML DATA
 		//-------------------------------------
@@ -382,7 +381,7 @@ class CI_Xmlrpcs extends CI_Xmlrpc
 			return call_user_func($this->methods[$methName]['function'], $m);
 		}
 	}
-	
+
 	// --------------------------------------------------------------------
 
 	/**
@@ -410,7 +409,7 @@ class CI_Xmlrpcs extends CI_Xmlrpc
 		$v->addArray($output);
 		return new XML_RPC_Response($v);
 	}
-	
+
 	// --------------------------------------------------------------------
 
 	/**
@@ -481,7 +480,7 @@ class CI_Xmlrpcs extends CI_Xmlrpc
 			return new XML_RPC_Response(0, $this->xmlrpcerr['introspect_unknown'], $this->xmlrpcstr['introspect_unknown']);
 		}
 	}
-	
+
 	// --------------------------------------------------------------------
 
 	/**
@@ -607,7 +606,6 @@ class CI_Xmlrpcs extends CI_Xmlrpc
 
 }
 // END XML_RPC_Server class
-
 
 /* End of file Xmlrpcs.php */
 /* Location: ./system/libraries/Xmlrpcs.php */

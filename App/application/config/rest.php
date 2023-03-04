@@ -1,6 +1,4 @@
-<?php
-
-defined('BASEPATH') OR exit('No direct script access allowed');
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
 
 /*
 |--------------------------------------------------------------------------
@@ -125,7 +123,7 @@ $config['rest_auth'] = 'basic';
 | Note: If 'rest_auth' is set to 'session' then change 'auth_source' to the name of the session variable
 |
 */
-// library works great, but using Nginx something bad happens.. 
+// library works great, but using Nginx something bad happens..
 $config['auth_source'] = 'library';
 
 /*
@@ -183,7 +181,6 @@ $config['auth_library_function'] = 'check';
 // $config['auth_override_class_method']['deals']['insert'] = 'digest';
 // $config['auth_override_class_method']['accounts']['user'] = 'basic';
 // $config['auth_override_class_method']['dashboard']['*'] = 'basic';
-
 
 // ---Uncomment list line for the wildard unit test
 // $config['auth_override_class_method']['wildcard_test_cases']['*'] = 'basic';
@@ -610,7 +607,7 @@ $config['allowed_cors_origins'] = [];
 | CORS Forced Headers
 |--------------------------------------------------------------------------
 |
-| If using CORS checks, always include the headers and values specified here 
+| If using CORS checks, always include the headers and values specified here
 | in the OPTIONS client preflight.
 | Example:
 | $config['forced_cors_headers'] = [
@@ -619,7 +616,7 @@ $config['allowed_cors_origins'] = [];
 |
 | Added because of how Sencha Ext JS framework requires the header
 | Access-Control-Allow-Credentials to be set to true to allow the use of
-| credentials in the REST Proxy. 
+| credentials in the REST Proxy.
 | See documentation here:
 | http://docs.sencha.com/extjs/6.5.2/classic/Ext.data.proxy.Rest.html#cfg-withCredentials
 |
