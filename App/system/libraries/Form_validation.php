@@ -37,6 +37,8 @@ class CI_Form_validation {
 	protected $error_string			= '';
 	protected $_safe_form_data		= FALSE;
 
+	protected $_post_fields		   = array();
+
 	/**
 	 * Constructor
 	 */
@@ -55,6 +57,9 @@ class CI_Form_validation {
 		{
 			mb_internal_encoding($this->CI->config->item('charset'));
 		}
+
+		// Get POST fields
+		$this->_post_fields = $this->_get_post_fields($_POST);
 
 		log_message('debug', "Form Validation Class Initialized");
 	}
@@ -75,7 +80,7 @@ class CI_Form_validation {
 	public function set_rules($field, $label = '', $rules = '')
 	{
 		// No reason to set rules if we have no POST data
-		if (count($_POST) == 0)
+		if (count($this->_post_fields) == 0)
 		{
 			return $this;
 		}
@@ -136,16 +141,20 @@ class CI_Form_validation {
 			$is_array	= FALSE;
 		}
 
-		// Build our master array
-		$this->_field_data[$field] = array(
-			'field'				=> $field,
-			'label'				=> $label,
-			'rules'				=> $rules,
-			'is_array'			=> $is_array,
-			'keys'				=> $indexes,
-			'postdata'			=> NULL,
-			'error'				=> ''
-		);
+		// Get only rules of the fields contained in the form
+		if (in_array($field,$this->_post_fields))
+		{
+			// Build our master array
+			$this->_field_data[$field] = array(
+				'field'				=> $field,
+				'label'				=> $label,
+				'rules'				=> $rules,
+				'is_array'			=> $is_array,
+				'keys'				=> $indexes,
+				'postdata'			=> NULL,
+				'error'				=> ''
+			);
+		}
 
 		return $this;
 	}
@@ -281,39 +290,26 @@ class CI_Form_validation {
 	 */
 	public function run($group = '')
 	{
-		// Do we even have any data to process?  Mm?
-		if (count($_POST) == 0)
-		{
-			return FALSE;
-		}
-
 		// Does the _field_data array containing the validation rules exist?
-		// If not, we look to see if they were assigned via a config file
+		// If not, we look to see if they were assigned via a config file		
 		if (count($this->_field_data) == 0)
 		{
 			// No validation rules?  We're done...
 			if (count($this->_config_rules) == 0)
 			{
-				return FALSE;
+				return count($this->_post_fields) > 0;
 			}
 
-			// Is there a validation rule for the particular URI being accessed?
-			$uri = ($group == '') ? trim($this->CI->uri->ruri_string(), '/') : $group;
+			$group_rules = ($group == '' ? array() : isset($this->_config_rules[$group]) ? $this->_config_rules[$group] : array());
+			$uri_rules = isset($this->_config_rules[trim($this->CI->uri->ruri_string(), '/')]) ? $this->_config_rules[trim($this->CI->uri->ruri_string(), '/')] : array();
 
-			if ($uri != '' AND isset($this->_config_rules[$uri]))
-			{
-				$this->set_rules($this->_config_rules[$uri]);
-			}
-			else
-			{
-				$this->set_rules($this->_config_rules);
-			}
+			$this->set_rules(array_merge((isset($this->_config_rules) ? $this->_config_rules : array()),$uri_rules,$group_rules));
 
 			// We're we able to set the rules correctly?
 			if (count($this->_field_data) == 0)
 			{
 				log_message('debug', "Unable to find validation rules");
-				return FALSE;
+				return TRUE;
 			}
 		}
 
@@ -712,6 +708,30 @@ class CI_Form_validation {
 		}
 
 		return $fieldname;
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * Get all POST fields
+	 *
+	 * @access	private
+	 * @param	null
+	 * @return	array
+	 */
+	protected function _get_post_fields()
+	{
+		$fields = array();
+
+		foreach ($_POST as $key => $value) {
+			$fields[] = $key;
+
+			if (is_array($value)) {
+				$fields = array_merge($fields, _get_post_fields($value));
+			}
+		}
+
+		return $fields;
 	}
 
 	// --------------------------------------------------------------------
