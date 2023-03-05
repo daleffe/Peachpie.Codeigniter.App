@@ -291,7 +291,7 @@ class CI_Form_validation {
 	public function run($group = '')
 	{
 		// Does the _field_data array containing the validation rules exist?
-		// If not, we look to see if they were assigned via a config file		
+		// If not, we look to see if they were assigned via a config file
 		if (count($this->_field_data) == 0)
 		{
 			// No validation rules?  We're done...
@@ -971,9 +971,20 @@ class CI_Form_validation {
 	 */
 	public function is_unique($str, $field)
 	{
-		list($table, $field)=explode('.', $field);
-		$query = $this->CI->db->limit(1)->get_where($table, array($field => $str));
+		list($table_field,$key_field,$key_post) = explode(',',$field);
+		list($table,$field) = explode('.', $table_field);
 
+		$value_post = (isset($_POST[$key_post]) ? $_POST[$key_post] : '');
+
+		$filter = array($field => $str);
+
+		if (!empty($value_post))
+		{
+			$filter[$key_field . ' != '] = $value_post;
+		}
+
+		$query = $this->CI->db->limit(1)->get_where($table,$filter);
+		
 		return $query->num_rows() === 0;
     }
 
