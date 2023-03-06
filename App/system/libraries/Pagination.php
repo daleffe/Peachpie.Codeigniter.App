@@ -219,7 +219,7 @@ class CI_Pagination {
 		}
 		else
 		{
-			$this->base_url = rtrim($this->base_url, '/') .'/';
+			$this->base_url = rtrim($this->base_url, '/') .'/' . $CI->router->fetch_class() . '/' . $CI->router->fetch_method() . '/';
 		}
 
 		// And here we go...
