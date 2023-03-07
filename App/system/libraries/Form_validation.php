@@ -971,21 +971,66 @@ class CI_Form_validation {
 	 */
 	public function is_unique($str, $field)
 	{
-		list($table_field,$key_field,$key_post) = explode(',',$field);
-		list($table,$field) = explode('.', $table_field);
+		$values = array();
+		$diff = array();
 
-		$value_post = (isset($_POST[$key_post]) ? $_POST[$key_post] : '');
+		$fields = explode('&',$field);
 
-		$filter = array($field => $str);
-
-		if (!empty($value_post))
+		if (count($fields) > 0)
 		{
-			$filter[$key_field . ' != '] = $value_post;
+			$table_fields = explode(',',$fields[0]);
+			unset($fields[0]);
+
+			if (count($table_fields) > 0)
+			{
+				list($table,$field) = explode('.',$table_fields[0]);
+				unset($table_fields[0]);
+
+				if (count($table_fields) == 2)
+				{
+					$table_fields = array_values($table_fields);
+
+					if (isset($_POST[$table_fields[1]]))
+					{
+						$diff[$table_fields[0]] = $_POST[$table_fields[1]];
+					}
+				}
+			}
 		}
 
-		$query = $this->CI->db->limit(1)->get_where($table,$filter);
-		
-		return $query->num_rows() === 0;
+		foreach ($fields as $field_collection)
+		{
+			$field_split = explode(',',$field_collection);
+
+			if (count($field_split)  == 2)
+			{
+				if (isset($_POST[$field_split[1]]))
+				{
+					$values[trim($field_split[0])] = trim($_POST[$field_split[1]]);
+				}
+			}
+		}
+
+		if (!empty(trim($table)) && !empty(trim($field)))
+		{
+			$filter = array($field => $str);
+
+			if (count($diff) == 1)
+			{
+				$filter[trim(key($diff)) . ' != '] = trim($diff[key($diff)]);
+			}
+
+			foreach ($values as $value_key => $value_val)
+			{
+				$filter[trim($value_key)] = trim($value_val);
+			}
+
+			$query = $this->CI->db->limit(1)->get_where($table,$filter);
+
+			return $query->num_rows() === 0;
+		}
+
+		return FALSE;
     }
 
 	// --------------------------------------------------------------------
