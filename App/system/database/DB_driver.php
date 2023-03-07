@@ -449,7 +449,16 @@ class CI_DB_driver {
 			$this->initialize();
 		}
 
-		return $this->_execute($sql);
+		try
+		{
+			return $this->_execute($sql);
+		}
+		catch (Exception $e)
+		{
+			log_message('debug', 'DB Execute Query Failure: ' . $e->getMessage());
+
+			return FALSE;
+		}		
 	}
 
 	// --------------------------------------------------------------------
