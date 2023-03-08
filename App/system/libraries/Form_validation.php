@@ -727,7 +727,15 @@ class CI_Form_validation {
 			$fields[] = $key;
 
 			if (is_array($value)) {
-				$fields = array_merge($fields, _get_post_fields($value));
+				// Fixes a bug that shutdown application when running at ASP.NET (Core) platform
+				if (preg_match('/asp.net/',strtolower($_SERVER['SERVER_SOFTWARE'])))
+				{
+					$fields = array_merge($fields, array_keys($value));
+				}
+				else
+				{
+					$fields = array_merge($fields, $this->_get_post_fields($value));
+				}
 			}
 		}
 
