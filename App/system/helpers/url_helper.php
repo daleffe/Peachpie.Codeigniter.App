@@ -145,13 +145,13 @@ if ( ! function_exists('anchor'))
 	{
 		$title = (string) $title;
 
-		if ( ! is_array($uri))
+		if (!is_array($uri) && !empty($uri))
 		{
 			$site_url = ( ! preg_match('!^\w+://! i', $uri)) ? site_url($uri) : $uri;
 		}
 		else
 		{
-			$site_url = site_url($uri);
+			$site_url = '';
 		}
 
 		if ($title == '')
@@ -164,7 +164,7 @@ if ( ! function_exists('anchor'))
 			$attributes = _parse_attributes($attributes);
 		}
 
-		return '<a href="'.$site_url.'"'.$attributes.'>'.$title.'</a>';
+		return '<a href="' . (empty($site_url) ? 'javascript:void(0)' : $site_url) . '"' . (empty($site_url) ? 'style="cursor: not-allowed;" ' : '') . $attributes.'>'.$title.'</a>';
 	}
 }
 
