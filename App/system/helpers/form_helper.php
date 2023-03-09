@@ -54,6 +54,9 @@ if ( ! function_exists('form_open'))
 		if ($action && strpos($action, '://') === FALSE)
 		{
 			$action = $CI->config->site_url($action);
+		} else if (empty(trim($action)))
+		{
+			$action = $CI->input->server('REQUEST_URI') == '/' ? '' : $CI->input->server('REQUEST_URI');
 		}
 
 		// If no action is provided then set to the current url
