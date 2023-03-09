@@ -67,11 +67,11 @@ class MY_Session extends CI_Session
 	{
 		if (!empty($text))
 		{
-			$this->set_flashdata($this->_alert_key,$this->_get_alert($text,$class));
+			$this->set_flashdata($this->_alert_key,$this->get_alert($text,$class));
 		}
 	}
 
-	private function _get_alert($text, $class = 'alert alert-primary')
+	public function get_alert($text, $class = 'alert alert-primary')
 	{
 		return '<div' . (empty(trim($class)) ? '' : ' class="' . $class . '"') . ' role="alert">' . trim($text) . '</div>';
 	}
