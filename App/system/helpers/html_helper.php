@@ -407,7 +407,7 @@ if ( ! function_exists('meta'))
 			$content	= ( ! isset($meta['content']))	? ''	: $meta['content'];
 			$newline	= ( ! isset($meta['newline']))	? "\n"	: $meta['newline'];
 
-			$str .= '<meta '.$type.'="'.$name.'" content="'.$content.'" />'.$newline;
+			$str .= '<meta '.$type.'="'.$name.'"' . (!empty($content) ? ' content="'.$content.'"' : '') . ' />'.$newline;
 		}
 
 		return $str;
