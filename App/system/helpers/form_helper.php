@@ -178,7 +178,24 @@ if ( ! function_exists('form_input'))
 {
 	function form_input($data = '', $value = '', $extra = '')
 	{
-		$defaults = array('type' => 'text', 'name' => (( ! is_array($data)) ? $data : ''), 'value' => $value);
+		$type = 'text';
+
+		if (is_string($extra))
+		{
+			$attrs = array_filter(explode(" ", $extra));
+
+			foreach ($attrs as $attrKey => $attr)
+			{
+				if (preg_match('/type=/',$attr))
+				{
+					$input_type = explode('=',trim($attr),2);
+
+					if (count($input_type) == 2) if (!empty(trim($input_type[1]))) $type = str_replace('"',"",trim($input_type[1]));
+				}
+			}
+		}
+
+		$defaults = array('type' => $type, 'name' => (( ! is_array($data)) ? $data : ''), 'value' => $value);
 
 		return "<input "._parse_form_attributes($data, $defaults).$extra." />";
 	}
