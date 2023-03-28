@@ -335,7 +335,24 @@ class CI_Form_validation {
 				}
 			}
 
-			$this->_execute($row, explode('|', $row['rules']), $this->_field_data[$field]['postdata']);
+			$rules = array_filter(explode('|', $row['rules']));
+
+			foreach ($rules as $index => $rule) {
+				if (stripos($rule, 'regex_match') === 0) {
+					$start_rm = stripos($row['rules'],'regex_match[');
+					$len = strripos($row['rules'],'#]',$start_rm) - $start_rm;
+					$regex = substr($row['rules'],$start_rm,$len);
+					if (!empty(trim($regex))) $regex .= '#]';
+					if (!empty($regex)) $row['rules'] = str_ireplace($regex,'',$row['rules']);
+
+					$rules = array_filter(explode('|', $row['rules']));
+					if (!empty(trim($regex))) array_push($rules,$regex);
+
+					break;
+				}
+			}
+
+			$this->_execute($row, $rules, $this->_field_data[$field]['postdata']);
 		}
 
 		// Did we end up with any errors?
