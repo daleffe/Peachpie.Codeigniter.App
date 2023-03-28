@@ -330,7 +330,7 @@ if ( ! function_exists('form_dropdown'))
 	{
 		if ( ! is_array($selected))
 		{
-			$selected = array($selected);
+			$selected = empty(trim($selected)) ? array() : array($selected);
 		}
 
 		// If no selected state was submitted we will attempt to set it automatically
