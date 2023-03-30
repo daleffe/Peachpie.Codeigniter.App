@@ -499,7 +499,7 @@ class CI_Form_validation {
 
 		// If the field is blank, but NOT required, no further tests are necessary
 		$callback = FALSE;
-		if ( ! in_array('required', $rules) AND is_null($postdata))
+		if ((!in_array('required', $rules) AND stripos($row['rules'], 'at_least_one') === false) AND is_null($postdata))
 		{
 			// Before we bail out, does the rule contain a callback?
 			if (preg_match("/(callback_\w+(\[.*?\])?)/", implode(' ', $rules), $match))
@@ -546,8 +546,10 @@ class CI_Form_validation {
 					$this->_error_array[$row['field']] = $message;
 				}
 			}
-
-			return;
+			else if (stripos($row['rules'], 'at_least_one') === false)
+			{
+				return;
+			}
 		}
 
 		// --------------------------------------------------------------------
@@ -1477,6 +1479,92 @@ class CI_Form_validation {
 		return str_replace(array('<?php', '<?PHP', '<?', '?>'),  array('&lt;?php', '&lt;?PHP', '&lt;?', '?&gt;'), $str);
 	}
 
+	// --------------------------------------------------------------------
+
+	/**
+	 * Alpha and space
+	 *
+	 * @access	public
+	 * @param	string
+	 * @return	bool
+	 */
+	function alpha_space($str)
+    {
+        return ( ! preg_match("/^([A-Za-zÀ-ú ])+$/i", $str)) ? FALSE : TRUE;
+    }
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * Alpha numeric and space
+	 *
+	 * @access	public
+	 * @param	string
+	 * @return	bool
+	 */
+	function alpha_numeric_space($str)
+    {
+        return ( ! preg_match("/^([A-Za-zÀ-ú0-9 ])+$/i", $str)) ? FALSE : TRUE;
+    }
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * Fraction
+	 *
+	 * @access	public
+	 * @param	string
+	 * @return	bool
+	 */
+	function fraction($str)
+    {
+        return ( ! preg_match("/^(\d++(?! */))? *-? *(?:(\d+) */ *(\d+))?.*$/", $str)) ? FALSE : TRUE;
+    }
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * PCI compliance password
+	 *
+	 * @access	public
+	 * @param	string
+	 * @return	bool
+	 */
+	function pci_password($str)
+    {
+        $special = '!@#$%*-_=+.';
+
+        return (preg_match('/^(?=^.{6,99}$)(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*['.$special.'])(?!.*?(.)\1{1,})^.*$/', $str)) ? TRUE : FALSE;
+    }
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * At least one
+	 *
+	 * @access	public
+	 * @param	string
+	 * @return	bool
+	 */
+	function at_least_one($str, $fields)
+    {
+		$list = array_filter(explode('&',$fields));
+
+		foreach ($list as $field)
+		{
+			if (isset($_POST[$field]))
+			{
+				if (!empty($_POST[$field]))
+				{
+					return TRUE;
+				}
+			}
+		}
+
+        return FALSE;
+    }
+
+	// --------------------------------------------------------------------
 }
 // END Form Validation Class
 
