@@ -353,7 +353,11 @@ if ( ! function_exists('form_dropdown'))
 		{
 			$key = (string) $key;
 
-			if (is_array($val) && ! empty($val))
+			if ((($key === "0") || empty(trim($key))) && is_string($val) && empty(trim($val)))
+			{
+				$form .= '<option></option>';
+			}
+			elseif (is_array($val) && ! empty($val))
 			{
 				$form .= '<optgroup label="'.$key.'">'."\n";
 
