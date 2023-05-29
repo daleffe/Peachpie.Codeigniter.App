@@ -778,7 +778,7 @@ class CI_Form_validation {
 	{
 		if ( ! isset($this->_field_data[$field]))
 		{
-			return $default;
+			return (isset($_POST[$field]) ? $_POST[$field] : $default);
 		}
 
 		// If the data is an array output them one at a time.
