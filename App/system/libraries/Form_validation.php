@@ -1565,6 +1565,20 @@ class CI_Form_validation {
     }
 
 	// --------------------------------------------------------------------
+
+	/**
+	 * Is valid date
+	 *
+	 * @access	public
+	 * @param	string
+	 * @return	bool
+	 */
+	function is_valid_date($str, $format)
+    {		
+		return (empty(trim($str)) || empty(trim($format))) ? FALSE : (DateTime::createFromFormat($format, $str) != FALSE);
+    }
+
+	// --------------------------------------------------------------------
 }
 // END Form Validation Class
 

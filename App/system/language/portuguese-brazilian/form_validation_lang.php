@@ -28,6 +28,7 @@ $lang['alpha_numeric_space'] = "O campo %s deve conter letras, números e espaç
 $lang['fraction']            = "O campo %s deve ser uma fração válida.";
 $lang['pci_password']		 = "Para a conformidade com o PCI,% s deve ter entre 6 e 99 caracteres de comprimento, não deve conter dois caracteres repetitivos consecutivos, contêm pelo menos uma letra maiúscula, pelo menos uma letra minúscula, pelo menos um número e pelo menos um caractere especial (!@#$%*-_=+.).";
 $lang['at_least_one']		 = "Informe, pelo menos, um(a) %s.";
+$lang['is_valid_date']	     = "O campo %s deve ser uma data válida.";
 
 /* End of file form_validation_lang.php */
 /* Location: ./system/language/pt-br/form_validation_lang.php */
