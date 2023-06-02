@@ -425,7 +425,7 @@ class CI_Form_validation {
 		// --------------------------------------------------------------------
 
 		// Cycle through each rule and run it
-		foreach ($rules As $rule) {
+		foreach ($rules as $rule) {
 			$_in_array = FALSE;
 
 			// We set the $postdata variable with the current data in our master array so that
@@ -475,7 +475,15 @@ class CI_Form_validation {
 					// If our own wrapper function doesn't exist we see if a native PHP function does.
 					// Users can use any native PHP function call that has one param.
 					if (function_exists($rule)) {
-						$result = $rule($postdata);
+						// Bypass execution if is using built-in "trim" function and $postdata isn't string.
+						if (strtolower(trim($rule)) == 'trim' && !is_string($postdata)) {
+							$result = TRUE;
+						}
+						// Using is_array built-in function to convert it.
+						elseif (strtolower(trim($rule)) == 'is_array' && !is_array($postdata)) {
+							$postdata = array();
+							$result = TRUE;
+						} else { $result = $rule($postdata); }
 
 						if ($_in_array == TRUE) {
 							$this->_field_data[$row['field']]['postdata'][$cycles] = (is_bool($result)) ? $postdata : $result;
