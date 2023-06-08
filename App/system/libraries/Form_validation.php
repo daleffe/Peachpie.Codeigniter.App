@@ -1226,7 +1226,13 @@ class CI_Form_validation {
     {
 		$list = array_filter(explode('&',$fields));
 
-		foreach ($list as $field) if (isset($_POST[$field])) if (!empty($_POST[$field])) return TRUE;
+		foreach ($list as $field) if (isset($_POST[$field])) {
+			if (is_string($_POST[$field])) {
+				if (!empty(trim($_POST[$field]))) return TRUE;
+			} else if (is_array($_POST[$field])) {
+				if (count($_POST[$field]) > 0) return TRUE;
+			}
+		}
 
         return FALSE;
     }
