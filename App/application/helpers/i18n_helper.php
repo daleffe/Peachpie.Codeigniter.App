@@ -23,7 +23,14 @@ if (!function_exists('ulang')) {
 // First-letter uppercase translated text
 if (!function_exists('fulang')) {
     function fulang($text) {
-        return ucfirst(strtolower(lang($text)));
+        return ucfirst(lang($text));
+    }
+}
+
+// First-letter lowercase translated text
+if (!function_exists('fllang')) {
+    function fllang($text) {
+        return lcfirst(lang($text));
     }
 }
 
