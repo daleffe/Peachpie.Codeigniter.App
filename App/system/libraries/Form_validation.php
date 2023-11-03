@@ -1251,6 +1251,25 @@ class CI_Form_validation {
 		return (empty(trim($str)) || empty(trim($format))) ? FALSE : (DateTime::createFromFormat($format, $str) != FALSE);
     }
 
+	/**
+	 * Differs
+	 *
+	 * @access	public
+	 * @param	string
+	 * @param   string
+	 * @return	bool
+	 */
+	function differs($str, $fields)
+    {
+		$list = array_filter(explode('&',$fields));
+
+		foreach ($list as $field) if (isset($_POST[$field])) {
+			if (strcmp($str,$_POST[$field]) == 0) return FALSE;
+		}
+
+        return TRUE;
+    }
+
 	// --------------------------------------------------------------------
 }
 // END Form Validation Class

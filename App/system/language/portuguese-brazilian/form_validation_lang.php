@@ -17,7 +17,7 @@ $lang['is_numeric']			 = "O campo %s deve conter somente caracteres númericos."
 $lang['integer']			 = "O campo %s deve conter um inteiro.";
 $lang['regex_match']		 = "O campo %s não está em um formato correto.";
 $lang['matches']			 = "O campo %s não é igual ao campo %s.";
-$lang['is_unique'] 			 = "O campo %s deve conter um único valor.";
+$lang['is_unique'] 			 = "O campo %s deve conter um valor único.";
 $lang['is_natural']			 = "O campo %s deve conter somente números positivos.";
 $lang['is_natural_no_zero']	 = "O campo %s deve conter um número maior que zero.";
 $lang['decimal']			 = "O campo %s deve conter um número decimal.";
@@ -29,6 +29,7 @@ $lang['fraction']            = "O campo %s deve ser uma fração válida.";
 $lang['pci_password']		 = "Para a conformidade com o PCI,% s deve ter entre 6 e 99 caracteres de comprimento, não deve conter dois caracteres repetitivos consecutivos, contêm pelo menos uma letra maiúscula, pelo menos uma letra minúscula, pelo menos um número e pelo menos um caractere especial (!@#$%*-_=+.).";
 $lang['at_least_one']		 = "Informe, pelo menos, um(a) %s.";
 $lang['is_valid_date']	     = "O campo %s deve ser uma data válida.";
+$lang['differs']			 = "O campo %s deve conter um valor único.";
 
 /* End of file form_validation_lang.php */
 /* Location: ./system/language/pt-br/form_validation_lang.php */
