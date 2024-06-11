@@ -23,4 +23,19 @@ if (!function_exists('str_contains')) {
         return $needle !== '' && mb_strpos($haystack, $needle) !== false;
     }
 }
+
+if (!function_exists('array_key_first')) {
+    function array_key_first(array $array) {
+        foreach ($array as $key => $value) { 
+            return $key; 
+        }
+    }
+}
+
+if (!function_exists('array_key_last')) {
+    function array_key_last(array $array) { 
+        end($array); 
+        return key($array); 
+    }
+}
 /* End of file */
