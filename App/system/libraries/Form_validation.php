@@ -564,11 +564,9 @@ class CI_Form_validation {
 			$fields[] = $key;
 
 			if (is_array($value)) {
-				// Fixes a bug that shutdown application when running at ASP.NET (Core) platform
-				if (preg_match('/asp.net/',strtolower($_SERVER['SERVER_SOFTWARE']))) {
-					$values = array_filter($value, function($k) { return is_string($k); }, ARRAY_FILTER_USE_KEY);
-					$fields = array_merge($fields, array_keys($values));
-				} else { $fields = array_merge($fields, $this->_get_post_fields($value)); }
+				// Fixes a bug that shutdown application when running at ASP.NET (Core) platform				
+				$values = array_filter($value, function($k) { return is_string($k); }, ARRAY_FILTER_USE_KEY);
+				$fields = array_merge($fields, array_keys($values));				
 			}
 		}
 
@@ -1166,7 +1164,7 @@ class CI_Form_validation {
 	 */
 	function alpha_space($str)
     {
-        return ( ! preg_match("/^([A-Za-zÀ-ú ])+$/i", $str)) ? FALSE : TRUE;
+        return ( ! preg_match("/^([A-Za-zÃ€-Ãº ])+$/i", $str)) ? FALSE : TRUE;
     }
 
 	// --------------------------------------------------------------------
@@ -1180,7 +1178,7 @@ class CI_Form_validation {
 	 */
 	function alpha_numeric_space($str)
     {
-        return ( ! preg_match("/^([A-Za-zÀ-ú0-9 ])+$/i", $str)) ? FALSE : TRUE;
+        return ( ! preg_match("/^([A-Za-zÃ€-Ãº0-9 ])+$/i", $str)) ? FALSE : TRUE;
     }
 
 	// --------------------------------------------------------------------
