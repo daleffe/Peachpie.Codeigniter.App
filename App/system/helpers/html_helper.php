@@ -220,7 +220,11 @@ if ( ! function_exists('img'))
 			{
 				$CI =& get_instance();
 
-				if ($index_page === TRUE)
+				if (strpos($v, 'data:image') !== FALSE)
+				{
+					$img .= ' src="' . $v . '"';
+				}
+				else if ($index_page === TRUE)
 				{
 					$img .= ' src="'.$CI->config->site_url($v).'"';
 				}
