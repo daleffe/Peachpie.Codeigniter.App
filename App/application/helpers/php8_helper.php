@@ -26,16 +26,23 @@ if (!function_exists('str_contains')) {
 
 if (!function_exists('array_key_first')) {
     function array_key_first(array $array) {
-        foreach ($array as $key => $value) { 
-            return $key; 
+        foreach ($array as $key => $value) {
+            return $key;
         }
     }
 }
 
 if (!function_exists('array_key_last')) {
-    function array_key_last(array $array) { 
-        end($array); 
-        return key($array); 
+    function array_key_last(array $array) {
+        end($array);
+        return key($array);
+    }
+}
+
+if (!function_exists('safe_intval')) {
+    function safe_intval($value, $default = 0) {
+        $value = is_numeric($value) ? intval($value) : $default;
+        return is_int($value) ? $value : $default;
     }
 }
 /* End of file */
