@@ -82,9 +82,9 @@ class CI_Output {
 	 * Whether or not to parse variables like {elapsed_time} and {memory_usage}
 	 *
 	 * @var bool
-	 * @access 	protected
+	 * @access 	public
 	 */
-	protected $parse_exec_vars	= TRUE;
+	public $parse_exec_vars	= TRUE;
 
 	/**
 	 * Constructor
